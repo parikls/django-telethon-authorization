@@ -30,7 +30,7 @@ def request_code(request):
         return e.to_response()
 
     if client.is_user_authorized():
-        return JsonResponse({"success": False, "code": -1, "error": "You are already authorized"})
+        return JsonResponse({"success": False, "message": "You are already authorized"})
     try:
         response = client.send_code_request(phone)
         auth.phone_code_hash = response.phone_code_hash
@@ -40,11 +40,11 @@ def request_code(request):
 
     except RPCError as e:
         return JsonResponse(
-            {"success": False, "code": -1, "error": "Telegram exception occurred. %s. %s" % (e.code, e.message)})
+            {"success": False, "message": "Telegram exception occurred. %s. %s" % (e.code, e.message)})
 
     except Exception as e:
         logger.warning("TG REQUEST CODE. POST. Error occurred during telegram send code\n%s" % e)
-        return JsonResponse({"success": False, "error": "'Error occurred during code sending\n%s'" % e})
+        return JsonResponse({"success": False, "message": "'Error occurred during code sending\n%s'" % e})
 
 
 @login_required
@@ -59,7 +59,7 @@ def submit(request):
     try:
         auth = TelegramAuthorization.objects.get(user=request.user, phone=phone)
     except TelegramAuthorization.DoesNotExist:
-        return JsonResponse({"success": False, "error": "Phone '%s' is invalid'" % phone})
+        return JsonResponse({"success": False, "message": "Phone '%s' is invalid'" % phone})
 
     client = get_telegram_client(phone)
 
@@ -73,11 +73,11 @@ def submit(request):
 
     except RPCError as e:
         return JsonResponse(
-            {"success": False, "code": -1, "error": "Telegram exception occurred. %s. %s" % (e.code, e.message)})
+            {"success": False, "message": "Telegram exception occurred. %s. %s" % (e.code, e.message)})
 
     except Exception as e:
         logger.warning("TG Login. POST. Error occurred during telegram sign-in\n%s" % e)
-        return JsonResponse({"success": False, "error": "'Error occurred during telegram sign-in\n%s'" % e})
+        return JsonResponse({"success": False, "message": "'Error occurred during telegram sign-in\n%s'" % e})
     return JsonResponse({"success": True})
 
 
@@ -93,11 +93,11 @@ def logout(request):
     try:
         telegram_authorization = TelegramAuthorization.objects.get(user=request.user, phone=phone)
     except TelegramAuthorization.DoesNotExist:
-        return JsonResponse({"success": False, "error": "Phone '%s' is invalid'" % phone})
+        return JsonResponse({"success": False, "message": "Phone '%s' is invalid'" % phone})
 
     client = get_telegram_client(telegram_authorization.phone)
 
     if client.log_out():
         return JsonResponse({"success": True})
     else:
-        return JsonResponse({"success": False, "code": -1, "error": "Telegram RPC error"})
+        return JsonResponse({"success": False, "message": "Telegram RPC error"})

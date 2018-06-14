@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 
 
-class BaseException(Exception):
+class DTAException(Exception):
+    """ Base exception which could represent itself as a JSON response"""
     def __init__(self, message):
         self.message = message
 
@@ -9,9 +10,9 @@ class BaseException(Exception):
         return JsonResponse({"success": False, "message": self.message})
 
 
-class PayloadException(BaseException):
+class PayloadException(DTAException):
     pass
 
 
-class TelegramAuthorizationException(BaseException):
+class TelegramAuthorizationException(DTAException):
     pass

@@ -15,13 +15,12 @@ setup(
     license='BSD License',
     description='Provide REST API for Telethon authorization',
     long_description=README,
-    url='https://github.com/porovozls',
+    url='https://github.com/porovozls/django-telethon-authorization',
     author='Dmytro Smyk',
     author_email='porovozls@gmail.com',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 2.0.6',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',  # example license
         'Operating System :: OS Independent',

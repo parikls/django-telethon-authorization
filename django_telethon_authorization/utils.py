@@ -41,7 +41,7 @@ def get_telegram_client(phone):
     return client
 
 
-def telegram_is_logged_in(request):
+def is_authorized(request):
     try:
         telegram_authorization = TelegramAuthorization.objects.get(user=request.user)
     except TelegramAuthorization.DoesNotExist:
