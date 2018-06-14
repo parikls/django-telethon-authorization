@@ -1,0 +1,8 @@
+.idea
+.idea/
+idea
+idea/
+*.egg-info
+*.egg-info/
+dist
+dist/
