@@ -1,5 +1,5 @@
+import os
 from django.apps import AppConfig
-from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -8,13 +8,11 @@ class TelegramAuthConfig(AppConfig):
 
     def ready(self):
         if not (
-            getattr(settings, "DTA_TG_SESSION_DIR", None) and
-            getattr(settings, "DTA_TG_API_ID", None) and
-            getattr(settings, "DTA_TG_API_HASH", None)
+            os.environ.get("TG_API_ID", None) and
+            os.environ.get("TG_API_HASH", None)
         ):
             raise ImproperlyConfigured(
-                "\nIn order to use django-telethon-authorization you must set settings variables:\n"
-                "DTA_TG_SESSION_DIR\n"
-                "DTA_TG_API_ID\n"
-                "DTA_TG_API_HASH"
+                "\nIn order to use django-telethon-authorization you must set environment variables:\n"
+                "TG_API_ID\n"
+                "TG_API_HASH"
             )
