@@ -23,10 +23,9 @@ Quick start
 
 * TG_API_ID = 111111
 * TG_API_HASH = api_hash
-
-if you use SQLite as a session backend - also provide path to session directory::
-
 * TG_SESSION_PATH = /path/to/sessions
+
+Provide `TG_SESSION_PATH` only if you use SQLite as a session backend (Telethon default)
 
 4. Run `python manage.py migrate` to create the  models.
 
