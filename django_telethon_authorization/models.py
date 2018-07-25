@@ -8,3 +8,6 @@ class TelegramAuthorization(models.Model):
     code = models.IntegerField(null=True, blank=True)
     phone_code_hash = models.CharField(max_length=254, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.phone

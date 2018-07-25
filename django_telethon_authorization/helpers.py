@@ -12,6 +12,7 @@ from .exceptions import TelegramAuthorizationException, PayloadException
 
 
 class Telegram:
+
     @staticmethod
     def get_client(request_or_phone: Union[HttpRequest, str], session_class=SQLiteSession) -> TelegramClient:
         """
@@ -80,10 +81,6 @@ def parse_json_payload(body, *keys):
     except (ValueError, TypeError) as exc:
         raise PayloadException("Can't load JSON from raw payload '%s'\n%s" % (raw_payload, exc))
     for key in keys:
-        if key not in payload:
-            raise PayloadException("Key '%s' was not found in payload '%s'" % (key, payload))
-        if not payload[key]:
-            raise PayloadException("Value for key '%s' can't be null")
         yield payload.get(key)
 
 
