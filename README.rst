@@ -11,7 +11,7 @@ Quick start
 
     INSTALLED_APPS = [
         ...
-        'django-telethon-authorization',
+        'django_telethon_authorization',
     ]
 
 2. Include django-telethon-authorization URL's in your project urls.py like this::
