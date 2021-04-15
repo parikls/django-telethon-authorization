@@ -1,5 +1,5 @@
-Project is not maintaned anymore. Though you can still use it as a "reference"
-------------------------------------------------------------------------------
+Project is no longer maintaned.
+===============================
 
 =====
 Django Telethon Authorization
